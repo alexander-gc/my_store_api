@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const { dbUser, dbHost, dbName, dbPassword, dbPort, isProd } = require('../config/keys');
+const { dbUser, dbHost, dbName, dbPassword, dbPort, isProd, dbUrl } = require('../config/keys');
 const setupModels = require('../database/models/index');
 
 //const URI = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
@@ -20,7 +20,7 @@ if (isProd) {
     }
 };
 
-const sequelize = new Sequelize(dbName, dbUser, dbPassword, options);
+const sequelize = new Sequelize(dbUrl, options);
 
 setupModels(sequelize);
 
