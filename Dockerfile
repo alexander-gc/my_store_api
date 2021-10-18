@@ -22,5 +22,5 @@ ENV PATH=/server/node_modules/.bin:$PATH
 
 WORKDIR /server/node_server
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
 
