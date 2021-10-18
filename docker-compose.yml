@@ -42,7 +42,7 @@ volumes:
   #pgadmin:
   #  image: dpage/pgadmin4
   #  environment: 
-  #   - PGADMIN_DEFAULT_EMAIL=andrixalexander15@gmail.com
-  #    - PGADMIN_DEFAULT_PASSWORD=node_pgadmin 
+  #   - PGADMIN_DEFAULT_EMAIL=correo@gmail.com
+  #    - PGADMIN_DEFAULT_PASSWORD=pg123
   #  ports:
   #    - 5050:80
