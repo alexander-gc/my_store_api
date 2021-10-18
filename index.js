@@ -29,5 +29,5 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log('Corriendo servidor en el puerto: ' + port);
+  console.log('Corriendo server en el puerto: ' + port);
 });
