@@ -3,9 +3,11 @@ const { Sequelize } = require('sequelize');
 const { dbUser, dbHost, dbName, dbPassword, dbPort } = require('../config/keys');
 const setupModels = require('../database/models/index');
 
-const URI = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
+//const URI = `postgres://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`;
 
-const sequelize = new Sequelize(URI, {
+const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+    host: dbHost,
+    port: dbPort,
     dialect: 'postgres',
     logging: true
 });

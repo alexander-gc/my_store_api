@@ -16,7 +16,11 @@ class OrderService {
       customerId
     });
 
-    return newOrder;
+    const order = await models.Order.findByPk(newOrder.id, {
+      attributes: { exclude: ['total'] }
+    })
+
+    return order;
   }
 
   async addItem(data) {
