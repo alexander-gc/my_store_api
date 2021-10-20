@@ -17,6 +17,7 @@ services:
       - postgres
     build:
       dockerfile: Dockerfile
+      target: DEV
       context: .
     restart: unless-stopped
     ports:

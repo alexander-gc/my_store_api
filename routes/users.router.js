@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 
 const UserService = require('../server/user.service');
 const validatorHandler = require('./../middlewares/validator.handler');
@@ -36,6 +37,17 @@ router.post('/',
       const body = req.body;
       const newCategory = await service.create(body);
       res.status(201).json(newCategory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.post('/login',
+  passport.authenticate('local', { session: false }), //Por defecto se llama 'local'
+  async (req, res, next) => {
+    try {
+      res.status(201).json(req.user);
     } catch (error) {
       next(error);
     }

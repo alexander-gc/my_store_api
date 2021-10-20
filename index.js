@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const passport = require('passport')
 const routerApi = require('./routes');
 
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler');
@@ -22,6 +23,9 @@ const options = {
 
 app.use(cors(options));
 
+require('./utils/auth/index');
+app.use(passport.initialize());
+
 routerApi(app);
 
 app.use(logErrors);
@@ -29,5 +33,5 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log('Corriendo server en el puerto: ' + port);
+  console.log('Corriendo servidor en el puerto: ' + port);
 });

@@ -1,10 +1,7 @@
 const boom = require('@hapi/boom');
+const bcrypt = require('bcrypt');
 
 const { models } = require('../connection/sequelize');
-
-//const pool = require('../connection/pool');
-//const connection = require('../connection/connection');
-
 class UserService {
   constructor() {
     //this.pool = pool;
@@ -13,6 +10,8 @@ class UserService {
 
   async create(data) {
     const { email, password } = data;
+
+    const passHash = await bcrypt.hashSync(password, 10);
 
     const emailExists = await models.User.findOne({
       where: {
@@ -24,8 +23,10 @@ class UserService {
 
     const newUser = await models.User.create({
       email,
-      password
+      password: passHash
     });
+
+    delete newUser.dataValues.password;
 
     return newUser;
   }
@@ -49,6 +50,16 @@ class UserService {
     });
 
     if (!user) throw boom.notFound("User not found in the database");
+
+    return user;
+  }
+
+  async findByEmail(email) {
+
+    const user = await models.User.findOne({
+      where: { email },
+      attributes: { exclude: ['createdAt'] }
+    });
 
     return user;
   }
