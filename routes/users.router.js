@@ -1,8 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
 
-const { jwtKey } = require('../config/keys');
 const UserService = require('../server/user.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/user.schema');
@@ -19,19 +17,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id',
-  validatorHandler(getUserSchema, 'params'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const category = await service.findOne(id);
-      res.json(category);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
 router.post('/',
   validatorHandler(createUserSchema, 'body'),
   async (req, res, next) => {
@@ -45,16 +30,13 @@ router.post('/',
   }
 );
 
-router.post('/login',
-  passport.authenticate('local', { session: false }), //Por defecto se llama 'local'
+router.get('/:id',
+  validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
-      const user = req.user;
-
-      const payload = { id: user.id, role: user.role };
-      const token = await jwt.sign(payload, jwtKey, { expiresIn: '1h' });
-
-      res.status(201).json({ user, token });
+      const { id } = req.params;
+      const category = await service.findOne(id);
+      res.json(category);
     } catch (error) {
       next(error);
     }
