@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
-const { jwtKey } = require('./../config/keys');
+const { jwtKey, emailPass, emailUser } = require('./../config/keys');
 const UserService = require('./user.service');
 const service = new UserService();
 
@@ -37,13 +37,13 @@ class AuthService {
             secure: true,
             port: 465,
             auth: {
-                user: 'andrixalexander15@gmail.com',
-                pass: 'hbgyceruxxvczhop'
+                user: emailUser,
+                pass: emailPass
             }
         });
 
         const info = await transporter.sendMail({
-            from: 'andrixalexander15@gmail.com',
+            from: emailUser,
             to: user.email,
             subject: "Correo de prueba",
             text: "Hola!",

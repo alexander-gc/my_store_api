@@ -13,6 +13,9 @@ module.exports = {
     dbUrl: process.env.DATABASE_URL,
 
     apiKey: process.env.API_KEY,
-    jwtKey: process.env.JWT_KEY
+    jwtKey: process.env.JWT_KEY,
 
-}
+    emailUser: process.env.EMAIL_USER,
+    emailPass: process.env.EMAIL_PASS
+
+};

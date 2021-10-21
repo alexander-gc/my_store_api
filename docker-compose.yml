@@ -38,6 +38,8 @@ services:
       - DATABASE_URL=postgres://node:store123@postgres:5432/my_store
       - API_KEY=store_123_priv
       - JWT_KEY=0ZH76fzhjMAkitKObrwJR4eaEyo2nSDT
+      - EMAIL_USER=andrixalexander15@gmail.com
+      - EMAIL_PASS=hbgyceruxxvczhop
 
 volumes:
   postgres_data: {}
