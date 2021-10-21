@@ -27,10 +27,10 @@ const OrderSchema = {
         field: 'created_at',
         defaultValue: Sequelize.NOW
     },
-    total: {
-        type: DataTypes.VIRTUAL, //El tipo virtual no se refleja en la base de datos, nada más se refleja en Node.
+    total: { //El virtual no se refleja en la base de datos, nada más en NodeJs.
+        type: DataTypes.VIRTUAL,
         get() {
-            if (this.items.length > 0) {
+            if (this.items && this.items.length > 0) {
                 return this.items.reduce((total, item) => {
                     return total + (item.price * item.OrderProduct.amount);
                 }, 0);

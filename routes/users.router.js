@@ -1,6 +1,8 @@
 const express = require('express');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
+const { jwtKey } = require('../config/keys');
 const UserService = require('../server/user.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/user.schema');
@@ -47,7 +49,12 @@ router.post('/login',
   passport.authenticate('local', { session: false }), //Por defecto se llama 'local'
   async (req, res, next) => {
     try {
-      res.status(201).json(req.user);
+      const user = req.user;
+
+      const payload = { id: user.id, role: user.role };
+      const token = await jwt.sign(payload, jwtKey, { expiresIn: '1h' });
+
+      res.status(201).json({ user, token });
     } catch (error) {
       next(error);
     }

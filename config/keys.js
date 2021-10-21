@@ -12,6 +12,7 @@ module.exports = {
     dbPort: process.env.DB_PORT,
     dbUrl: process.env.DATABASE_URL,
 
-    apiKey: process.env.API_KEY
+    apiKey: process.env.API_KEY,
+    jwtKey: process.env.JWT_KEY
 
 }

@@ -12,6 +12,7 @@ class CustomerService {
         //if (customerExists) throw boom.conflict("The userId is already occupied by someone else");
 
         const userIdExists = await models.User.findByPk(userId);
+
         if (!userIdExists) throw boom.notFound("User does not exist in the database");
 
         const newCustomer = await models.Customer.create({

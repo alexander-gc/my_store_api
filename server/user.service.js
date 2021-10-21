@@ -9,7 +9,7 @@ class UserService {
   }
 
   async create(data) {
-    const { email, password } = data;
+    const { email, password, role } = data;
 
     const passHash = await bcrypt.hashSync(password, 10);
 
@@ -23,7 +23,8 @@ class UserService {
 
     const newUser = await models.User.create({
       email,
-      password: passHash
+      password: passHash,
+      role
     });
 
     delete newUser.dataValues.password;
@@ -36,6 +37,7 @@ class UserService {
     //const [data] = await sequelize.query(query);
 
     const user = await models.User.findAll({
+      attributes: { exclude: ['password'] },
       include: ['customer']
     });
     return user;

@@ -36,6 +36,8 @@ services:
       - DB_NAME=my_store
       - DB_PORT=5432
       - DATABASE_URL=postgres://node:store123@postgres:5432/my_store
+      - API_KEY=store_123_priv
+      - JWT_KEY=0ZH76fzhjMAkitKObrwJR4eaEyo2nSDT
 
 volumes:
   postgres_data: {}
