@@ -50,8 +50,7 @@ class AuthService {
             html: "<b>Hola!</b>",
         });
 
-        /*  console.log(info.messageId);
-         console.log(nodemailer.getTestMessageUrl(info)); */
+        //console.log(nodemailer.getTestMessageUrl(info)); 
 
         return { message: 'Email sent' };
     };
