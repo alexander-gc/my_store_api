@@ -22,7 +22,20 @@ router.post('/recovery',
     async (req, res, next) => {
         try {
             const { email } = req.body;
-            const resp = await service.sendMail(email);
+            const resp = await service.sendRecoveryPassword(email);
+            res.json(resp);
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+//Agregar schema ->
+router.post('/reset-password',
+    async (req, res, next) => {
+        try {
+            const { token, newPassword } = req.body;
+            const resp = await service.resetPassword(token, newPassword);
             res.json(resp);
         } catch (error) {
             next(error);
